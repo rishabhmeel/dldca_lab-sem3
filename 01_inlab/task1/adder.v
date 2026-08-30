@@ -5,5 +5,6 @@ module adder (
     output wire cout,
     output wire sum
 );
-
+    assign sum = a^b^cin;
+    assign cout = (a & b) | (b&cin) | (cin&a);
 endmodule
