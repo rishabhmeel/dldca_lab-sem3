@@ -8,6 +8,8 @@
 
 **Crib Form** : [\[CS231\] Re-Evaluation Request Form](https://docs.google.com/forms/d/e/1FAIpQLSfki4vqrKC4cpkJJB3ldHS-DOxl_E4kSprBl13Kh58UfaA6ng/viewform?usp=header)
 
+**Leave Absence Form**: [Leave Request Form](https://forms.gle/5RyNdPokXHe5WkaB6)
+
 <table>
   <thead>
     <tr>
