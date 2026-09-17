@@ -1,0 +1,155 @@
+#! /usr/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x64a467c3e470 .scope module, "tb" "tb" 2 3;
+ .timescale -9 -9;
+v0x64a467c69890_0 .var "a", 0 0;
+v0x64a467c69950_0 .var "b", 0 0;
+v0x64a467c69a10_0 .var/i "errors", 31 0;
+v0x64a467c69ab0_0 .var "sel", 0 0;
+v0x64a467c69b50_0 .net "y_behavioral", 0 0, v0x64a467c69130_0;  1 drivers
+v0x64a467c69c40_0 .net "y_dataflow", 0 0, L_0x64a467c69ce0;  1 drivers
+S_0x64a467c3e600 .scope task, "check" "check" 2 27, 2 27 0, S_0x64a467c3e470;
+ .timescale -9 -9;
+TD_tb.check ;
+    %delay 1, 0;
+    %load/vec4 v0x64a467c69c40_0;
+    %load/vec4 v0x64a467c69b50_0;
+    %cmp/ne;
+    %jmp/0xz  T_0.0, 6;
+    %load/vec4 v0x64a467c69a10_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x64a467c69a10_0, 0, 32;
+    %vpi_call 2 32 "$display", "  MISMATCH at time %0t: dataflow = %b, behavioral = %b", $time, v0x64a467c69c40_0, v0x64a467c69b50_0 {0 0 0};
+T_0.0 ;
+    %end;
+S_0x64a467c3f410 .scope module, "uut_behavioral" "mux_behavioral" 2 15, 3 1 0, S_0x64a467c3e470;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "sel";
+    .port_info 3 /OUTPUT 1 "y";
+v0x64a467c68dd0_0 .net "a", 0 0, v0x64a467c69890_0;  1 drivers
+v0x64a467c68e90_0 .net "b", 0 0, v0x64a467c69950_0;  1 drivers
+v0x64a467c68f60_0 .net "sel", 0 0, v0x64a467c69ab0_0;  1 drivers
+v0x64a467c69060_0 .net "x", 0 0, L_0x64a467c69ef0;  1 drivers
+v0x64a467c69130_0 .var "y", 0 0;
+E_0x64a467c4be40 .event anyedge, v0x64a467c68c60_0;
+S_0x64a467c4c260 .scope module, "m1" "mux_dataflow" 3 9, 4 1 0, S_0x64a467c3f410;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "sel";
+    .port_info 3 /OUTPUT 1 "y";
+v0x64a467c4c4b0_0 .net "a", 0 0, v0x64a467c69890_0;  alias, 1 drivers
+v0x64a467c68b00_0 .net "b", 0 0, v0x64a467c69950_0;  alias, 1 drivers
+v0x64a467c68bc0_0 .net "sel", 0 0, v0x64a467c69ab0_0;  alias, 1 drivers
+v0x64a467c68c60_0 .net "y", 0 0, L_0x64a467c69ef0;  alias, 1 drivers
+L_0x64a467c69ef0 .functor MUXZ 1, v0x64a467c69890_0, v0x64a467c69950_0, v0x64a467c69ab0_0, C4<>;
+S_0x64a467c69220 .scope module, "uut_dataflow" "mux_dataflow" 2 8, 4 1 0, S_0x64a467c3e470;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "sel";
+    .port_info 3 /OUTPUT 1 "y";
+v0x64a467c694a0_0 .net "a", 0 0, v0x64a467c69890_0;  alias, 1 drivers
+v0x64a467c69590_0 .net "b", 0 0, v0x64a467c69950_0;  alias, 1 drivers
+v0x64a467c696a0_0 .net "sel", 0 0, v0x64a467c69ab0_0;  alias, 1 drivers
+v0x64a467c69790_0 .net "y", 0 0, L_0x64a467c69ce0;  alias, 1 drivers
+L_0x64a467c69ce0 .functor MUXZ 1, v0x64a467c69890_0, v0x64a467c69950_0, v0x64a467c69ab0_0, C4<>;
+    .scope S_0x64a467c3f410;
+T_1 ;
+    %wait E_0x64a467c4be40;
+    %load/vec4 v0x64a467c69060_0;
+    %assign/vec4 v0x64a467c69130_0, 0;
+    %jmp T_1;
+    .thread T_1, $push;
+    .scope S_0x64a467c3e470;
+T_2 ;
+    %vpi_call 2 23 "$monitor", "At time %0t: a = %b, b = %b, sel = %b -> dataflow = %b, behavioral = %b", $time, v0x64a467c69890_0, v0x64a467c69950_0, v0x64a467c69ab0_0, v0x64a467c69c40_0, v0x64a467c69b50_0 {0 0 0};
+    %end;
+    .thread T_2;
+    .scope S_0x64a467c3e470;
+T_3 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x64a467c69a10_0, 0, 32;
+    %vpi_call 2 40 "$dumpfile", "task2.vcd" {0 0 0};
+    %vpi_call 2 41 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x64a467c3e470 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x64a467c69890_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x64a467c69950_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x64a467c69ab0_0, 0, 1;
+    %fork TD_tb.check, S_0x64a467c3e600;
+    %join;
+    %delay 9, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x64a467c69890_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x64a467c69950_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x64a467c69ab0_0, 0, 1;
+    %fork TD_tb.check, S_0x64a467c3e600;
+    %join;
+    %delay 9, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x64a467c69890_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x64a467c69950_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x64a467c69ab0_0, 0, 1;
+    %fork TD_tb.check, S_0x64a467c3e600;
+    %join;
+    %delay 9, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x64a467c69890_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x64a467c69950_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x64a467c69ab0_0, 0, 1;
+    %fork TD_tb.check, S_0x64a467c3e600;
+    %join;
+    %delay 9, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x64a467c69890_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x64a467c69950_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x64a467c69ab0_0, 0, 1;
+    %fork TD_tb.check, S_0x64a467c3e600;
+    %join;
+    %delay 9, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x64a467c69890_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x64a467c69950_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x64a467c69ab0_0, 0, 1;
+    %fork TD_tb.check, S_0x64a467c3e600;
+    %join;
+    %delay 9, 0;
+    %load/vec4 v0x64a467c69a10_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_3.0, 4;
+    %vpi_call 2 51 "$display", "PASS: mux_dataflow and mux_behavioral agree on every input." {0 0 0};
+    %jmp T_3.1;
+T_3.0 ;
+    %vpi_call 2 53 "$display", "FAIL: %0d mismatch(es) found between mux_dataflow and mux_behavioral.", v0x64a467c69a10_0 {0 0 0};
+T_3.1 ;
+    %vpi_call 2 55 "$finish" {0 0 0};
+    %end;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "task2/tb_task2.v";
+    "task2/mux_behavioral.v";
+    "task2/mux_dataflow.v";

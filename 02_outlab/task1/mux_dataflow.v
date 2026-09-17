@@ -4,5 +4,6 @@ module mux_dataflow (
     input wire sel,
     output wire y
 );
+    assign y = (~sel)&a | (sel)&b;
 
 endmodule

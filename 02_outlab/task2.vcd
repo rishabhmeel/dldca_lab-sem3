@@ -1,0 +1,74 @@
+$date
+	Thu Sep 17 16:41:12 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module tb $end
+$var wire 1 ! y_dataflow $end
+$var wire 1 " y_behavioral $end
+$var reg 1 # a $end
+$var reg 1 $ b $end
+$var reg 1 % sel $end
+$var integer 32 & errors [31:0] $end
+$scope module uut_behavioral $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 % sel $end
+$var wire 1 ' x $end
+$var reg 1 " y $end
+$scope module m1 $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 % sel $end
+$var wire 1 ' y $end
+$upscope $end
+$upscope $end
+$scope module uut_dataflow $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 % sel $end
+$var wire 1 ! y $end
+$upscope $end
+$scope task check $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0'
+b0 &
+0%
+0$
+0#
+0"
+0!
+$end
+#10
+1$
+#20
+1"
+1'
+1!
+1%
+#30
+0%
+0$
+1#
+#40
+0"
+0'
+0!
+1%
+#50
+1"
+1'
+1!
+1$
+#60

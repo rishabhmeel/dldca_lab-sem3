@@ -32,5 +32,114 @@ module stopwatch (
     // Sequential logic: on posedge clk, if rst is high, zero everything.
     // Otherwise, if running and tick, apply the next values you computed
     // combinationally above. If not running, or no tick this cycle, hold.
+    wire tick;
+    reg  running;
+
+    tick_gen #(.LIMIT(4)) tg (
+        .clk(clk),
+        .rst(rst),
+        .tick(tick)
+    );
+
+    assign tick_out = tick;
+
+    always @(posedge clk) begin
+        if (rst)
+            running <= 1'b0;
+        else if (start_stop)
+            running <= ~running;
+    end
+
+    reg [3:0] sec_ones_next;
+    wire sec_ones_carry;
+    reg [3:0] sec_tens_next;
+    wire sec_tens_carry;
+    reg [3:0] min_ones_next;
+    wire min_ones_carry;
+    reg [3:0] min_tens_next;
+    wire min_tens_carry;
+
+    assign sec_ones_carry = (sec_ones == 4'd9 );
+    assign sec_tens_carry = (sec_tens == 4'd5 );
+    assign min_ones_carry = (min_ones == 4'd9 );
+    assign min_tens_carry = (min_tens == 4'd5 );
+
+    always @(*) begin
+        sec_ones_next = sec_ones;
+        sec_tens_next = sec_tens;
+        min_ones_next = min_ones;
+        min_tens_next = min_tens;
+        if(tick && running) begin
+            if(sec_ones_carry) begin
+                sec_ones_next = 4'd0;
+                if(sec_tens_carry) begin
+                    sec_tens_next = 4'd0;
+                    if(min_ones_carry) begin
+                        min_ones_next = 4'd0;
+                        if(min_tens_carry) begin
+                            min_tens_next = 4'd0;
+                        end else begin
+                            min_tens_next = min_tens + 4'd1;
+                        end
+                    end else begin
+                        min_ones_next = min_ones +4'd1;
+                    end
+                end else begin
+                    sec_tens_next = sec_tens + 4'd1;
+                end
+            end else begin
+                sec_ones_next = sec_ones + 4'd1;
+            end
+        end
+        
+    end
+
+
+    always @(posedge clk) begin
+        if(rst) begin
+            sec_ones <= 4'd0;
+            sec_tens <= 4'd0;
+            min_ones <= 4'd0;
+            min_tens <= 4'd0;
+        end else begin
+            sec_ones <= sec_ones_next;
+            sec_tens <= sec_tens_next;
+            min_ones <= min_ones_next;
+            min_tens <= min_tens_next;
+        end
+    end
+
+    // always @(posedge clk) begin
+    //     if(rst) begin
+    //         sec_ones <= 4'd0;
+    //         sec_tens <= 4'd0;
+    //         min_ones <= 4'd0;
+    //         min_tens <= 4'd0;
+    //     end else if(tick && running) begin
+    //         if(sec_ones == 4'd9)begin
+    //             sec_ones <= 4'd0;
+    //             if(sec_tens == 4'd5) begin
+    //                 sec_tens <= 4'd0;
+    //                 if(min_ones == 4'd9) begin
+    //                     min_ones <= 4'd0;
+    //                     if(min_tens == 4'd5) begin
+    //                         min_tens <= 4'd0;
+    //                     end else begin
+    //                         min_tens <= min_tens +4'd1;
+    //                     end
+    //                 end else begin
+    //                     min_ones <= min_ones + 4'd1;
+    //                 end
+    //             end else begin
+    //                 sec_tens <= sec_tens + 4'd1;
+    //             end
+    //         end else begin
+    //             sec_ones <= sec_ones + 4'd1;
+    //         end
+    //     end
+
+    // end
+    
+    
 
 endmodule

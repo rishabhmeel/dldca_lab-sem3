@@ -1,0 +1,154 @@
+$date
+	Thu Sep 17 18:01:14 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module tb $end
+$var wire 1 ! q4 $end
+$var wire 1 " q3 $end
+$var wire 1 # q2 $end
+$var wire 1 $ q1 $end
+$var reg 1 % clk $end
+$var reg 1 & d $end
+$var reg 1 ' load $end
+$var reg 1 ( rst $end
+$var integer 32 ) errors [31:0] $end
+$scope module dut1 $end
+$var wire 1 % clk $end
+$var wire 1 & d $end
+$var wire 1 ' load $end
+$var wire 1 ( rst $end
+$var reg 1 * next_q $end
+$var reg 1 $ q $end
+$upscope $end
+$scope module dut2 $end
+$var wire 1 % clk $end
+$var wire 1 & d $end
+$var wire 1 ' load $end
+$var wire 1 ( rst $end
+$var reg 1 + next_q $end
+$var reg 1 # q $end
+$upscope $end
+$scope module dut3 $end
+$var wire 1 % clk $end
+$var wire 1 & d $end
+$var wire 1 ' load $end
+$var wire 1 ( rst $end
+$var wire 1 , next_q $end
+$var reg 1 " q $end
+$upscope $end
+$scope module dut4 $end
+$var wire 1 % clk $end
+$var wire 1 & d $end
+$var wire 1 ' load $end
+$var wire 1 ( rst $end
+$var reg 1 ! q $end
+$upscope $end
+$scope task check $end
+$var reg 1 - expected $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+x-
+x,
+x+
+x*
+b0 )
+1(
+0'
+0&
+0%
+x$
+x#
+x"
+x!
+$end
+#5
+0*
+0+
+0,
+0$
+0#
+0"
+0!
+1%
+#10
+0%
+0-
+#11
+1&
+0(
+#15
+1%
+#20
+0%
+#22
+1*
+1+
+1,
+1'
+#25
+1$
+1#
+1"
+1!
+1%
+#30
+0%
+#32
+1-
+#33
+0&
+0'
+#35
+1%
+#40
+0%
+#44
+0*
+0+
+0,
+1'
+#45
+0$
+0#
+0"
+0!
+1%
+#50
+0%
+#54
+0-
+#55
+1*
+1+
+1,
+1(
+1&
+1%
+#60
+0%
+#65
+1%
+#66
+0(
+#70
+0%
+#75
+1!
+1"
+1#
+1$
+1%
+#76
+1-
+#77
