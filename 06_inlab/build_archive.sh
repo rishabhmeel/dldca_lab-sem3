@@ -21,7 +21,7 @@ fi
 
 mkdir -p "$ROLL_NO"
 
-FILES=(./task1/hello.s ./task2/divby10.s ./task3/atoi.s ./task4/itoa.s ./task5/adder.s)
+FILES=()
 
 echo "Packaging assignment files..."
 for file in "${FILES[@]}"; do
