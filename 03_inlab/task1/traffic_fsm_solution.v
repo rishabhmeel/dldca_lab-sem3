@@ -126,7 +126,7 @@ module duration_datapath (
         // 1. UPDATE: process standard 1Hz tick and state transitions first
         if (tick_1hz) begin
             if (remaining > 1) begin
-                remaining_next = remaining - 1;
+                remaining_next = remaining - 8'd1;
             end else begin
                 do_transition = 1'b1;
                 case (next_state)

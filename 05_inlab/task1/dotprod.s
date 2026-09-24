@@ -21,6 +21,21 @@ section .text
 _start:
 ;   Find the dot product of vec1 and vec2 (as doubles), truncate it toward
 ;   zero, and put the result in `rdi`
+    xor rdi, rdi
+    xorps xmm0, xmm0
+    xor rcx, rcx
+    
+    .for:
+    movsd xmm1, qword [vec1 + 8*rcx]
+    movsd xmm2, qword [vec2 + 8*rcx]
+    mulsd xmm1, xmm2
+    addsd xmm0,xmm1
+    inc rcx
+    cmp rcx, vecsize
+    jl .for
+    
+
+
 
 ; this instruction just truncates the decimal to an integer and stores it in rdi (don't mind it)
     cvttsd2si rdi, xmm0

@@ -7,9 +7,17 @@ section .data
 section .text
     global _start
 
+
 _start:
-
-
+    xor rdi, rdi
+    xor rcx, rcx
+.forbegin:
+    mov eax, dword [array +4*rcx]
+    xor edi, eax
+    inc rcx
+    cmp rcx, array_len
+    jl .forbegin
+.forend:
 
     mov eax, 60
     syscall

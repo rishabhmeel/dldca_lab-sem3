@@ -10,9 +10,9 @@ module triple_decoder (
     wire B = triple[1];
     wire C = triple[0];
 
-    assign valid =   /* V from your K-map */;
-    assign pair[1] = /* X from your K-map */;
-    assign pair[0] = /* Y from your K-map */;
+    assign valid =   (~A)*B | (~B)*C;
+    assign pair[1] = ((~A)*B | A*(~B))*C;
+    assign pair[0] = A*(~B)*C | (~A)*B*(~C);
 endmodule
 
 
@@ -56,10 +56,13 @@ module jean_grey_decoder (
 
     reg [1:0] state;
     reg [3:0] remaining;
-    /*reg/wire       capture;*/
+    reg capture;
+    
+    wire valid;
+    wire [1:0] pair_state;
 
-    triple_decoder td ( /* connect ports */ );
-    secret_accumulator sa ( /* connect ports */ );
+    triple_decoder td ( .triple(triple), .valid(valid), .pair(pair_state) );
+    secret_accumulator sa (.clk(clk),.rst(rst),.triple(triple),.capture(capture),.secret(secret) );
 
     // ! Please note carefully that you set all relevant outputs correctly
     always @(posedge clk or posedge rst) begin
@@ -85,11 +88,28 @@ module jean_grey_decoder (
                 end
 
                 READ: begin
-                    /* Your Code Here */
+                    if(valid) begin
+                        valid_out <= valid;
+                        pair <= pair_state;
+                        remaining <= remaining-1;
+                        state <= READ;
+                        if(remaining == 4'b0001 ) state <= DONE;
+                    end
+                    else begin
+                        state <= INTERCEPT;
+                        valid_out <= 1'b0;
+                        pair <= 2'b00;
+                        capture <= 1'b1;
+                    end
+                    secret_out <= 1'b0;
                 end
-
                 INTERCEPT: begin
-                    /* Your Code Here */
+                    secret_out <=1'b1;
+                    state <= READ;
+                    pair <= 2'b00;
+                    valid_out <= 1'b0;
+                    secret_out <= 1'b1;
+                    capture <= 1'b0;
                 end
 
                 DONE: begin

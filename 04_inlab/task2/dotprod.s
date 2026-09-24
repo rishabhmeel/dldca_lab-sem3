@@ -20,6 +20,17 @@ section .text
 
 _start:
 ;   Find the dot product of vec1 and vec2 and put it in `rdi`    
+    xor edi, edi
+    xor ecx, ecx
+
+.forbegin:
+    mov rsi, qword [vec1+8*rcx]
+    imul rsi, qword [vec2+8*rcx]
+    add rdi, rsi
+    inc rcx
+    cmp rcx, vecsize
+    jl .forbegin
+    
 
     mov rax, 60
     syscall

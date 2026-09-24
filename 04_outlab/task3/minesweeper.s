@@ -25,6 +25,13 @@ _start:
 ;   diagonals) are bombs -- remember cells on an edge or corner have
 ;   fewer than 8 neighbors. Exit with the number of non-bomb cells whose
 ;   neighbor-bomb-count is exactly 0.
+    xor rdi,rdi
+    xor rbx,rbx
+    xor rcx, rcx
+    
+    .rowloop:
+    
+
 
     mov rax, 60
     syscall

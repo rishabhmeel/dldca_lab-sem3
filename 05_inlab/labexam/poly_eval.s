@@ -12,6 +12,24 @@ section .text
 ; poly_eval(double* coeffs{rdi}, size_t N{rsi}, x{xmm0}) -> xmm0
 poly_eval:
     ; ==================== DO NOT EDIT ABOVE THIS LINE ====================
+    cmp esi,1
+    jg .recurse
+    movsd xmm0, qword [rdi]
+    ret
+.recurse:
+
+    movsd xmm0, qword [rdi]
+    sub rsp, 8
+    movsd [rsp],xmm0
+
+    dec esi
+    add rdi,8
+    call poly_eval
+
+    mulsd xmm0,[x_val]
+    addsd xmm0,[rsp]
+
+    add rsp,8
 
 
     ; ==================== DO NOT EDIT BELOW THIS LINE ====================
