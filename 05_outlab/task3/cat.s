@@ -10,5 +10,7 @@ _start:
 ;   to stdout until read() returns 0 (EOF), then close the file and exit 0.
 ;   Make your own functions for convenience!
 
+    
+
     mov rax, 60
     syscall

@@ -18,33 +18,7 @@ my_strlen:
     ret
 
 ; my_atoi(const char* str{rdi}) -> rax (handles an optional leading '-')
-my_atoi:
-    dec rdi      ; makes loop cleaner
-    xor eax, eax ; accumulator
-    xor ecx, ecx ; sign flag (0 = positive)
-    xor edx, edx
-.skip_ws:
-    inc rdi
-    cmp byte [rdi], ' '
-    je .skip_ws
-.check_neg:
-    cmp byte [rdi], '-'
-    sete cl
-    add rdi, rcx
-.parse_loop:
-    movzx edx, byte [rdi]
-    sub dl, '0'
-    cmp dl, 9
-    ja .finish ; not in '0' to '9'
-    lea rax, [rax+rax*4]
-    lea rax, [rdx+rax*2]
-    inc rdi
-    jmp .parse_loop
-.finish:
-    neg rcx
-    xor rax, rcx ; if rcx, rax <- ~rax
-    sub rax, rcx ; if rcx, rax <- ~rax+1 == -rax
-    ret
+c
 
 ; gcd(int64_t a{rdi}, int64_t b{rsi}) -> rax
 gcd:

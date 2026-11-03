@@ -21,18 +21,21 @@ double dot(const double* x, const double* y, int n) {
 int main() {
     using clock = std::chrono::steady_clock;
 
+    constexpr int REPEAT = 1000;
+
     for (int i = 0; i < N; i++) {  // fill the vectors with fixed values
         a[i] = (i % 10) * 0.5;
         b[i] = (i % 7) * 0.25;
     }
 
-    double result;
+    volatile double result;
 
     auto t0 = clock::now();
+    for(int i=0;i<REPEAT;i++)
     result = dot(a, b, N);
     auto t1 = clock::now();
 
-    double ns = std::chrono::duration<double, std::nano>(t1 - t0).count();
-    std::printf("dot: %.1f ns per call\n", ns);
+    double ns = std::chrono::duration<double, std::nano>(t1 - t0).count()/REPEAT;
+    std::printf("dot: %.1f ns per call (result %.1f) \n", ns, double(result));
     return 0;
 }

@@ -17,6 +17,10 @@ void multiply_ijk(int n) {
 /* ========================= YOUR CODE BELOW ========================= */
 
 void multiply_ikj(int n) {
+    for (int i = 0; i < n; i++)
+        for (int k = 0; k < n; k++)
+            for (int j = 0; j < n; j++)
+                C[i][j] += A[i][k] * B[k][j];
     /* TODO */
 }
 

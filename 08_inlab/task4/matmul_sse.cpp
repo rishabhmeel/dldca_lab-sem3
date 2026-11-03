@@ -5,7 +5,7 @@
 #include <string>
 #include <xmmintrin.h>
 
-const int MAXN = 1024;
+const int MAXN = 2048;
 static float A[MAXN][MAXN], B[MAXN][MAXN], C[MAXN][MAXN];
 
 void multiply_scalar(int n) {
@@ -21,6 +21,23 @@ void multiply_scalar(int n) {
 
 void multiply_sse(int n) {
     /* TODO */
+     for (int i = 0; i < n; i++){
+        for (int k = 0; k < n; k++) {
+            float a = A[i][k];
+            __m128 a4 = _mm_set1_ps(a);
+            int j = 0;
+            for (j = 0; j + 4 <= n; j += 4) {
+                __m128 b4 = _mm_loadu_ps(&B[k][j]);
+                __m128 c4 = _mm_loadu_ps(&C[i][j]);
+                c4 = _mm_add_ps(c4, _mm_mul_ps(a4, b4));
+                _mm_storeu_ps(&C[i][j], c4);
+            }
+            // int j = 0;
+            // for (; j + 4 <= n; j += 4);   // 4 at a time
+            for (; j < n; j++)
+                C[i][j] += a * B[k][j];   // leftovers
+        }
+    }
 }
 
 /* ========================= YOUR CODE ABOVE ========================= */

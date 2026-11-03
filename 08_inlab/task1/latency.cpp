@@ -24,11 +24,19 @@ int main() {
         /* ========================= YOUR CODE BELOW ========================= */
 
         // TODO: Warm-up - touch every element of the 'next' array once. Iterate from 0 to no. of lines
-
+        int a;
+        for(long k=0;k<n;k++)
+            a=next[k];
         // TODO: Start measuring time and then for READS no. of times, iterate through the array 
-
+        auto t0 =  std::chrono::steady_clock::now();
+        long k=0;
+        for(long i=0;i<READS;i++){
+            k=next[k];
+        }
+        auto t1 =  std::chrono::steady_clock::now();
+        double ns = std::chrono::duration<double,std::nano>(t1 - t0).count();
         // TODO: print in the given format (use std::printf)
-
+        std::printf("%ld %.2f\n", kb, ns / READS);
         /* ========================= YOUR CODE ABOVE ========================= */
     }
 }

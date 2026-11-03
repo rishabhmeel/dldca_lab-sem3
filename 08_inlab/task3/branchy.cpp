@@ -27,6 +27,12 @@ long sum_branchy() {
 long sum_branchless() {
     long s = 0;
     /* TODO */
+    for(int r=0;r<REPS;r++)
+        for(int j=0;j<N;j++){
+            int big = (a[j]>=T);
+            int sign = 2*big - 1;
+            s += sign * a[j];
+        }
     return s;
 }
 
