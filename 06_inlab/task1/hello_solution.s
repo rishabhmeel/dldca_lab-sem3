@@ -1,23 +1,12 @@
 section .data
-    greeting: db "Hello "
-    greeting_len equ $ - greeting
-    buf: times 512 db 0          ; sits right after greeting, so the two are contiguous
+    buf: times 512 db 0
 
 section .text
     global _start
 
 _start:
-    xor eax, eax          ; read
-    xor edi, edi          ; fd 0
-    lea rsi, [buf]
-    mov rdx, 512
-    syscall               ; rax = bytes read
-
-    lea rdx, [rax + greeting_len]  ; "Hello " + input, one contiguous run
-    mov rax, 1            ; write
-    mov rdi, 1            ; fd 1
-    lea rsi, [greeting]
-    syscall
+    ; TODO: read a line from stdin (fd 0), then print "Hello " followed by the
+    ;       bytes you read to stdout (fd 1) using a SINGLE write syscall. Exit 0.
 
     mov rax, 60
     xor edi, edi

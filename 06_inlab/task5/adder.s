@@ -13,6 +13,7 @@ section .text
 ; my_atoi(const char* buf{rdi}, size_t len{rsi}) -> uint64_t{rax}
 my_atoi:
     ; TODO: copy from Task 3
+<<<<<<< HEAD
     push rbx
     xor rcx,rcx
     xor rbx,rbx
@@ -30,11 +31,15 @@ my_atoi:
     mov rax,rbx
 .done:
     pop rbx
+=======
+
+>>>>>>> main
     ret
 
 _start:
     ; TODO: read two numbers from stdin, add them, then
     ;       printf("sum = %ld\n", sum). exit(0).
+<<<<<<< HEAD
     and rsp,-16
 
     xor rax,rax
@@ -66,6 +71,8 @@ _start:
     lea rdi, [fmt]
     mov rsi,rbx
     call printf
+=======
+>>>>>>> main
 
     xor edi, edi
     call exit

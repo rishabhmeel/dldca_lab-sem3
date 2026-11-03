@@ -31,36 +31,15 @@ my_atoi:
 _start:
     and rsp, -16
 
-    ; read one line from stdin, parse the total-seconds number
-    xor eax, eax          ; read
-    xor edi, edi          ; fd 0
-    lea rsi, [buf]
-    mov rdx, 256
-    syscall
-    lea rdi, [buf]
-    mov rsi, rax          ; len = bytes read
-    call my_atoi          ; rax = T
-
-    ; H = T / 3600, leftover = T % 3600
-    xor edx, edx          ; clear high half before div
-    mov rcx, 3600
-    div rcx               ; rax = H, rdx = leftover seconds
-    mov r12, rax          ; H
-
-    ; M = leftover / 60, S = leftover % 60
-    mov rax, rdx
-    xor edx, edx          ; clear high half again
-    mov rcx, 60
-    div rcx               ; rax = M, rdx = S
-    mov r13, rdx          ; S (save before rdx is reused as a printf arg)
-
-    ; printf("%ld:%02ld:%02ld\n", H, M, S)
-    lea rdi, [fmt]
-    mov rsi, r12          ; H
-    mov rdx, rax          ; M
-    mov rcx, r13          ; S
-    xor eax, eax          ; 0 vector-register args
-    call printf
+    ; TODO:
+    ;  - read one line from stdin, call my_atoi -> T (total seconds)
+    ;  - H = T / 3600 ; then split the remainder with / 60 into M and S
+    ;  - printf(fmt, H, M, S)   ; fmt is "%ld:%02ld:%02ld\n" above
+    ;  - exit(0)
+    ; div note: clear rdx (xor edx, edx) before EVERY div.
+    ; printf note: clear rax (xor eax, eax) before EVERY printf call.
+    ; Also if you are using stack for storing variables dont forget about
+    ; the 16-byte alignment before calling libc function call.
 
     xor edi, edi
     call exit

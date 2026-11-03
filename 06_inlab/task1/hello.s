@@ -1,6 +1,9 @@
 section .data
+<<<<<<< HEAD
     greeting: db "Hello "
     greeting_len equ $ - greeting
+=======
+>>>>>>> main
     buf: times 512 db 0
 
 section .text
@@ -9,6 +12,7 @@ section .text
 _start:
     ; TODO: read a line from stdin (fd 0), then print "Hello " followed by the
     ;       bytes you read to stdout (fd 1) using a SINGLE write syscall. Exit 0.
+<<<<<<< HEAD
     xor rax,rax
     xor rdi,rdi
     lea rsi, [buf]
@@ -22,6 +26,8 @@ _start:
     lea rsi, [greeting]
     syscall
     
+=======
+>>>>>>> main
 
     mov rax, 60
     xor edi, edi

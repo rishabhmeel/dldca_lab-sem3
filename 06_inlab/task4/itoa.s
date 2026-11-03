@@ -8,6 +8,7 @@ section .text
 ; my_atoi(const char* buf{rdi}, size_t len{rsi}) -> uint64_t{rax}
 my_atoi:
     ; TODO: copy your Task 3 solution here
+<<<<<<< HEAD
     push rbx
     xor rbx, rbx
 
@@ -31,6 +32,9 @@ my_atoi:
 .done:
     mov rax, rbx
     pop rbx
+=======
+
+>>>>>>> main
     ret
 
 ; ----------------------------------------------------------------------------
@@ -40,7 +44,10 @@ my_atoi:
 ;   significant first, so we fill buf forwards and then reverse it in place.
 ; ----------------------------------------------------------------------------
 my_itoa:
+<<<<<<< HEAD
     push rbx
+=======
+>>>>>>> main
     mov rax, rdi
     mov r8, rsi          ; write pointer
     mov r9, 10
@@ -68,13 +75,17 @@ my_itoa:
     dec r8
     jmp .reverse
 .done:
+<<<<<<< HEAD
     pop rbx
+=======
+>>>>>>> main
     ret
 
 _start:
     ; TODO: read two lines from stdin, my_atoi each, add them, my_itoa the sum
     ;       into outbuf, write the digits + a newline to stdout, exit 0.
 
+<<<<<<< HEAD
     xor rax,rax
     xor rdi,rdi
     lea rsi, [inbuf]
@@ -115,4 +126,8 @@ _start:
 
     mov rax, 60
     xor rdi,rdi
+=======
+    mov rax, 60
+    xor edi, edi
+>>>>>>> main
     syscall

@@ -7,6 +7,7 @@ section .text
 ; my_atoi(const char* buf{rdi}, size_t len{rsi}) -> uint64_t{rax}
 my_atoi:
     ; TODO
+<<<<<<< HEAD
     push rbx
     xor rbx, rbx
 
@@ -30,11 +31,15 @@ my_atoi:
 .done:
     mov rax, rbx
     pop rbx
+=======
+
+>>>>>>> main
     ret
 
 _start:
     ; TODO: read a line from stdin into buf, call my_atoi, exit with the result
 
+<<<<<<< HEAD
     mov rax,0
     mov rdi,0
     lea rsi,[buf]
@@ -49,4 +54,8 @@ _start:
 
     mov rax, 60
 
+=======
+    mov rax, 60
+    xor edi, edi
+>>>>>>> main
     syscall

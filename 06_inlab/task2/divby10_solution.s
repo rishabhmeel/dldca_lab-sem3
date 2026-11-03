@@ -3,17 +3,13 @@ section .text
 
 ; div_by_10(uint64_t n{rdi}) -> uint64_t{rax}
 div_by_10:
-    mov rax, rdi
-    shr rax, 1        ; n / 2
-    xor edx, edx      ; clear high half before div
-    mov rcx, 5
-    div rcx          ; rax / 5
+    ; TODO
+
     ret
 
 _start:
-    mov rdi, 250
-    call div_by_10
+    ; TODO: call div_by_10(250), exit with the result
 
-    mov rdi, rax
     mov rax, 60
+    xor edi, edi
     syscall

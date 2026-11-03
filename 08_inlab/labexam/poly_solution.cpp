@@ -35,18 +35,8 @@ void poly_slow() {
 /* ========================= YOUR CODE BELOW ========================= */
 
 void poly_fast() {
-    __m128 c[DEG + 1];
-    for (int d = 0; d <= DEG; d++)
-        c[d] = _mm_set1_ps(coef[d]);
-
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j += 4) {
-            __m128 x = _mm_loadu_ps(&in[i][j]);
-            __m128 r = c[DEG];
-            for (int d = DEG - 1; d >= 0; d--)
-                r = _mm_add_ps(_mm_mul_ps(r, x), c[d]);
-            _mm_storeu_ps(&out[i][j], r);
-        }
+    // TODO: make the above code faster
+    // Hint: You can parallelize operations 
 }
 
 /* ========================= YOUR CODE ABOVE ========================= */

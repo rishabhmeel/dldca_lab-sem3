@@ -27,9 +27,13 @@ my_atoi:
     jmp .loop
 .done:
     ret
+<<<<<<< HEAD
 ; div_by_60:
 ;     xor rdx.rdx
     
+=======
+
+>>>>>>> main
 _start:
     and rsp, -16
 
@@ -43,6 +47,7 @@ _start:
     ; Also if you are using stack for storing variables dont forget about
     ; the 16-byte alignment before calling libc function call.
 
+<<<<<<< HEAD
     xor rax,rax
     xor rdi,rdi
     lea rsi, [buf]
@@ -70,5 +75,7 @@ _start:
 
     call printf
 
+=======
+>>>>>>> main
     xor edi, edi
     call exit

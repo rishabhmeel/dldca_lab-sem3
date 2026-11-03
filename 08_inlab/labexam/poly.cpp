@@ -37,6 +37,7 @@ void poly_slow() {
 void poly_fast() {
     // TODO: make the above code faster
     // Hint: You can parallelize operations 
+<<<<<<< HEAD
 
     //submit if time not left
     // for (int i= 0; i < N; i++)
@@ -71,6 +72,8 @@ void poly_fast() {
             out[i][j] = r;
         }
     }
+=======
+>>>>>>> main
 }
 
 /* ========================= YOUR CODE ABOVE ========================= */
